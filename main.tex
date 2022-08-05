@@ -1,0 +1,349 @@
+%----------
+%	DOKUMENTUAREN KONFIGURAZIOA
+%----------
+
+% Dokumentu mota definitu eta pakete batzuk gehituko ditugu (\usepackage{package}), LaTeX-i funtzioak gehitzeko.
+\documentclass[12pt]{report} % 12 puntuko letra
+\renewcommand{\baselinestretch}{1.5} % lerro-arteko espazioa 1,5ekoa
+\parskip=6pt % 6 puntuko lerro saltoa
+
+% MARGINAK: 2,54 cm goian, behean eta aldeetan.
+\usepackage[a4paper,vmargin=2.54cm,hmargin=2.54cm,headsep=2cm]{geometry}
+\usepackage{changepage}
+
+% EDUKIAK
+\usepackage{titling}
+
+% KOLOREAK: portada eta listetako kodeentzako.
+\usepackage[table]{xcolor}
+\definecolor{}{RGB}{0,0,0}
+\definecolor{gray97}{gray}{.97}
+\definecolor{gray75}{gray}{.75}
+\definecolor{gray56}{gray}{.56}
+
+% PDF-A SORTZEKO --Metadatuak sortzeko beharrezkoa. <izena>.tex fitxategiaren alboan izen bereko .xmpdata fitxategi bat egon behar da.
+\usepackage[a-1b]{pdfx}
+
+% LINKAK
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,
+	linkcolor=black, % dokumentura linkak (aurkibidea, ...) beltzez
+	citecolor=black, % zitak ere beltzez
+	urlcolor=blue} % kanpora doazen linkak urdinez
+
+% MATEMATIKAKO EXPRESIOAK ERABILTZEKO
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{txfonts}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% HIZKUNTZA
+\usepackage[basque]{babel}
+\usepackage[babel, spanish=spanish]{csquotes}
+\AtBeginEnvironment{quote}{\small}
+
+% ORRI OINA
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.75pt}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{gray56}\leaders\hrule height \footrulewidth\hfill}}
+\rfoot{\thepage}
+\fancypagestyle{plain}{\pagestyle{fancy}}
+
+% TITULOEN EZARPENAK
+\usepackage{titlesec}
+%\titleformat{command}{format}{label}{sep}{before-code}[after-code]
+\usepackage{titletoc}
+%\usepackage{tocloft}
+
+%%% Chapter
+\titleformat{\chapter}
+{\bfseries\framebox[\linewidth][l]}
+{\thechapter.}
+{5pt}
+{\MakeUppercase}
+{}
+
+% Aurkibideendako bakarrik erabilia
+\titleformat{name=\chapter,numberless}
+{\large\bfseries\filcenter}
+{}
+{5pt}
+{\MakeUppercase}
+{}
+
+\titlespacing{\chapter}{0pt}{0pt}{*3}
+\titlecontents{chapter}
+[0pt]
+{}
+{\contentsmargin{0pt}\thecontentslabel.\enspace\uppercase}
+{\contentsmargin{0pt}\uppercase}
+{\titlerule*[.7pc]{.}\contentspage}
+%%% Section
+\titleformat{\section}
+{\normalsize\bfseries}
+{\thesection.}
+{5pt}
+{}
+
+\titlecontents{section}
+[5pt]
+{}
+{\contentsmargin{0pt}\thecontentslabel.\enspace}
+{\contentsmargin{0pt}}
+{\titlerule*[.7pc]{.}\contentspage}
+%%% Subsection
+\titleformat{\subsection}
+{\normalsize\bfseries\itshape}
+{\thesubsection.}
+{5pt}
+{}
+
+\titlecontents{subsection}
+[10pt]
+{}
+{\contentsmargin{0pt}
+	\thecontentslabel.\enspace}
+{\contentsmargin{0pt}}
+{\titlerule*[.7pc]{.}\contentspage}
+%%% Subsubsection
+\titleformat{\subsubsection}
+{\normalsize}
+{\thesubsubsection.}
+{5pt}
+{\underline}
+
+\titlecontents{subsubsection}
+[10pt]
+{}
+{\contentsmargin{0pt}
+	\thecontentslabel.\enspace}
+{\contentsmargin{0pt}}
+{\titlerule*[.7pc]{.}\contentspage}
+
+% NORBERAREN EZARPENAK
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\usepackage{pdfpages}
+
+% TAULAK
+\usepackage{multirow} % zeldak linkatzea ahalbidetzen du
+\usepackage{caption} % tituluak konfiguratu ahal izateko
+\usepackage{floatrow} % tituluak alineatzeko hau erabiltzen da
+\DeclareCaptionLabelFormat{aurretik}{\textbf{#2. #1. }}
+\usepackage{makecell}
+\renewcommand{\cellalign}{tl}
+
+% Taularen diseinua
+\captionsetup[table]{
+	position=top,
+	name=Taula,
+	singlelinecheck=off,
+	labelsep=none,
+	labelformat=aurretik,
+	justification=raggedright,
+}
+
+% IRUDIAK.
+\usepackage{graphicx}
+\graphicspath{{images/}} % irudien karpetaren erroa
+
+% Irudien diseinua
+\captionsetup[figure]{
+	position=top,
+	name=Irudia,
+	singlelinecheck=off,
+	labelsep=none,
+	labelformat=aurretik,
+	justification=raggedright,
+}
+
+% ORRI OINEKO NOTAK
+\usepackage{chngcntr} % numerazio kontinuoa erabiltzeko
+\counterwithout{footnote}{chapter}
+
+
+%BIBLIOGRAFÍA - Aldaketak eginez gero ez bada ezer gertatzen, artxibo auxiliarrak borratu eta orden honetan konpilatu fitxategia: 1. COMPILAR-BIBLIOGRAFIA 2. COMPILAR
+
+\include{bibliography/biblio_konf}
+
+% ENUMERATUAK
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+
+% EURO
+\usepackage{eurosym} % euroaren sinboloa erabili ahal izateko
+
+% GOIBURU ETA ORRI OINA
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\includegraphics[width=3.59cm]{images/orri_burua.png}}
+\rfoot{\thepage}
+
+%----------------
+%	DOKUMENTUA
+%----------------
+
+\begin{document}
+%\pagenumbering{Roman} % Lanaren gorputza baino lehenagoko orrietarako letra erromatarrak erabiliko dira
+
+%-----------
+%	AZALA
+%-----------
+\begin{titlepage}
+	\includepdf[pages=-]{resources/Portada}
+\end{titlepage}
+\color{black}
+
+\newpage %orri hutsa
+\thispagestyle{empty}
+\mbox{}
+
+
+%----------
+%	LABURPENA ETA HITZ GAKOAK (ABSTRACT)
+%----------
+
+\renewcommand{\abstractname}{\large\bfseries\filcenter\uppercase{Laburpena}}
+\begin{abstract}
+	\thispagestyle{plain}
+    \setcounter{page}{4}
+
+	Master Bukaerako Lan (MBL) honen xedea ikastetxeetan burujabetza digitalaren bidean urratsak ematen lagunduko duen formakuntza saio bat diseinatzea da. Horretarako, irakasle jarduna komunitate baten baitan ulertu eta ikastetxeko ekosistema indartzeko helburuz, Praktika Komunitate Profesionalen (PKP) markoan oinarritutako formakuntza saioa proposatzen da. Dokumentu honen hasieran problematika honen aurrean egin diren aurrekariak azaltzen dira; honekin lotuta, oinarri teorikoak zehazten dira; eta azkenik, finkatutako helburuak betetzeko formakuntza saioa diseinatzen da.
+	
+	Formakuntza saioak landuko diren problematika desberdinak, helburuak, edukiak eta sekuentziazio bat ditu zehaztuta. Hortaz gain, erabiliko den metodologia zehazten da eta beharrezko baliabideak definitzen dira. Azkenik, PKP oinarrien baitan, formakuntzaren feedback eta norberaren autoebaluazioa egitea proposatzen da, jakintzak ikastetxean hedatzeko lagungarria izango dena.
+	\begin{flushright}
+		\textbf{Euskara}
+	\end{flushright}
+	
+	\vspace{1.5\baselineskip}
+	
+	\textbf{Hitz gakoak:}\par
+	Burujabetza Digitala; Formakuntza Saioa; Baliabide Digital Libreak; GAFAM; Zientzia, Teknologia eta Gizartea; PKP\par
+	
+	\vfill
+\end{abstract}
+\renewcommand{\abstractname}{\large\bfseries\filcenter\uppercase{Abstract}}
+\begin{abstract}
+	\thispagestyle{plain}
+    \setcounter{page}{5}
+	
+	The purpose of this Final Master's Thesis (FMT) is to design a training course that will help schools in their way to digital autonomy. Understanding teaching as a community job, and to strengthen the school ecosystem, Professional Learning Community (PLC) framework is chosen for this course. By the start of the document, the background of this context can be read; it follows with the theoretical framework; and finally, and to reach the goals of this thesis, the training course can be found.
+	
+	The training course details the description of the problems, the goals, the contents and the scheduling. It also defines the methodology to be used and the resources required. Last, and following PLC basis, it is proposed to feedback the course and realize an auto-evaluation, that will be helpful to spread the knowledge upon the school.
+	\begin{flushright}
+		\textbf{English}
+	\end{flushright}
+
+	\vspace{1.5\baselineskip}
+
+	\textbf{Keywords:}\par
+	Digital Autonomy; Training Course; Open Digital Resources; GAFAM; Science, Technology and Society, PLC\par
+
+	\vfill
+\end{abstract}
+
+\newpage %orri hutsa
+\thispagestyle{empty}
+\mbox{}
+
+%----------
+%	Eskerrak
+%----------	
+%\chapter*{Eskerrak}
+%
+%\setcounter{page}{5}
+
+%Norbait eskertu nahi gero, idatzi hemen.
+
+%\vfill
+
+%\newpage % orri hutsa
+%\thispagestyle{empty}
+%\mbox{}
+
+%----------
+%	AURKIBIDEA
+%----------
+
+\setcounter{page}{6}
+\newpage
+%--
+% Aurkibide orokorra
+%-
+%\renewcommand{\contentsname}{\hfill\large\bfseries\uppercase{Gaien aurkibidea}\hfill}
+
+\thispagestyle{fancy}
+\tableofcontents
+\newpage % orri hutsa
+
+%--
+% Irudien aurkibidea (egon ezean, komentatu hurrengo lerroak)
+%-
+%\renewcommand{\listfigurename}{\hfill\large\bfseries\uppercase{Irudien zerrenda}\hfill}
+
+\thispagestyle{fancy}
+\listoffigures
+\newpage % orri hutsa
+
+%--
+% Taulen aurkibidea (egon ezean, komentatu hurrengo lerroak)
+%-
+%\renewcommand{\listtablename}{\hfill\large\bfseries\uppercase{Taulen zerrenda}\hfill}
+
+\thispagestyle{fancy}
+\listoftables
+\newpage % orri hutsa
+
+\thispagestyle{empty}
+\mbox{}
+
+
+%----------
+%	LANA
+%----------
+\clearpage
+\pagenumbering{arabic} % publikazio osorako zenbaki arabigoak erabiliko dira
+\setcounter{page}{1}
+
+\include{chapters/1_sarrera_helburuak_justifikazioa}
+\include{chapters/4_aurrekariak}
+\include{chapters/5_markoa}
+\include{chapters/6_formakuntza}
+\include{chapters/7_ondorioak}
+\include{chapters/8_etorkizuna}
+
+
+%----------
+%	BIBLIOGRAFIA
+%----------
+
+% \nocite{*} % Bibliografiara gehituta dauden dokumentu guztiak azaltzeo (nahiz eta ez erabiliak izan), kendu lerro honen aurretik dagoen %
+
+\clearpage
+\printbibliography[heading=bibnumbered, title=Bibliografia]
+
+%----------
+%	ERANSKINAK
+%----------
+% Lanak eranskinik baditu, aktibatu hemengo zati hau
+\appendix
+\chapter*{Eranskinak}
+\addcontentsline{toc}{chapter}{Eranksinak}
+%\pagenumbering{gobble} % eranskinak ez dira numeratzen
+\renewcommand{\thesection}{Eranskina \Roman{section}}
+\include{appendix/moodle_baldintzak}
+
+% Kontraportada
+\includepdf[pages=-]{resources/Kontraportada}
+\end{document}

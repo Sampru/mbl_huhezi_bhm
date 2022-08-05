@@ -1,0 +1,35 @@
+% Biber-ekin bibliografia sortzeko eta textu editorea konfiguratzeko hemen daukazu informazio gehiago: http://tex.stackexchange.com/questions/154751/biblatex-with-biber-configuring-my-editor-to-avoid-undefined-citations , https://www.overleaf.com/learn/latex/Bibliography_management_in_LaTeX y en http://www.ctan.org/tex-archive/macros/latex/exptl/biblatex-contrib
+
+% APA BIBLIOGRAFIARAKO AUKERAK
+\usepackage[backend=biber, style=apa, isbn=false, sortcites, maxbibnames=5, minbibnames=1, urldate=ymd]{biblatex} % APA zientzia sozialetarako gomendatzen den estiloak: "maxbibnames" autore kopurutik gora dagoenean "minbibnames" kopuruan etengo du lista, eta "et al." gehituko du.
+% \DeclareLanguageMapping{basque}{bibliography/basque-apa} % basque-apa ez dagoenez, guk sortua erabiliko dugu
+
+\DeclareLanguageMapping{basque}{spanish-apa} % basque-apa ez dagoenez, ingelesa erabiliko dugu
+
+\DefineBibliographyStrings{basque}{%
+  jourarticle      = {artikulua},
+  article          = {artikulua},
+  supplement       = {eranskina},
+  part             = {atal},
+  january          = {urtarrilaren},
+  february         = {otsailaren},
+  march            = {martxoaren},
+  april            = {apirilaren},
+  may              = {maiatzaren},
+  june             = {ekainaren},
+  july             = {uztailaren},
+  august           = {abuztuaren},
+  september        = {irailaren},
+  october          = {urriaren},
+  november         = {azaroaren},
+  december         = {abenduaren},
+  nodate           = {d\adddot g\adddot},
+  page             = {Orrialdea},
+  pages            = {Orrialdeak},
+  and              = {eta},
+  andothers        = {et\space al\adddot},
+  retrieved        = {Azken\space aldiz\space ikusia},
+  from             = {eskuragarri\space hemen:},
+}
+
+\addbibresource{bibliography/bibliography.bib} % artxiboari bibliography.bib deitu, eta bibliografia bertan sartu
